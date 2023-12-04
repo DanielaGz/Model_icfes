@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Icfes predicciones</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+   <script>
+      $(function() {
+        $("#includeHtml").load("{{ url_for('static', filename='navbar.html') }}");
+         console.log('a')
+      });
+   </script>
+  </script> 
+  <style>
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #6a11cb;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+    }
+
+    .height {
+      height: 400px;
+    }
+
+    .height2 {
+      height: 260px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="includeHtml"></div>
+
+  <div class="m-5">
+    <h1>Información inicial del DataFrame</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-12 p-2">
+        <div class="card rounded-3">
+          <div class="card-body">
+            <h5 class="card-title">Información del dataset</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <div class="height w-100 d-inline-block overflow-auto">
+              <table class="table table-striped">
+                <tr>
+                  <th>Columna</th>
+                  <th>Recuento</th>
+                  <th>Media</th>
+                  <th>Desviación Estándar</th>
+                  <th>Mínimo</th>
+                  <th>25%</th>
+                  <th>50%</th>
+                  <th>75%</th>
+                  <th>Máximo</th>
+                </tr>
+                {% for row in info_table.itertuples() %}
+                <tr>
+                  <td>{{ row[1] }}</td>
+                  <td>{{ row[2] }}</td>
+                  <td>{{ row[3] }}</td>
+                  <td>{{ row[4] }}</td>
+                  <td>{{ row[5] }}</td>
+                  <td>{{ row[6] }}</td>
+                  <td>{{ row[7] }}</td>
+                  <td>{{ row[8] }}</td>
+                  <td>{{ row[9] }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-md-3 p-2">
+        <div class="card rounded-3">
+          <div class="card-body">
+            <h5 class="card-title">Datos nulos</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <div class="height w-100 d-inline-block overflow-auto">
+              <table class="table table-striped">
+                <tr>
+                  <th>Columna</th>
+                  <th>Valores Nulos</th>
+                </tr>
+                {% for na_count in na_counts %}
+                <tr>
+                  <td>{{ na_count['index'] }}</td>
+                  <td>{{ na_count['Count'] }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 p-2">
+        <div class="card rounded-3">
+          <div class="card-body">
+            <h5 class="card-title">Datos anómalos</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <div class="height w-100 d-inline-block overflow-auto">
+              <table class="table table-striped">
+                <tr>
+                  <th>Columna</th>
+                  <th>Valores Anomalos</th>
+                </tr>
+                {% for na_count in na_counts %}
+                <tr>
+                  <td>{{ na_count['index'] }}</td>
+                  <td>{{ na_count['Count'] }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 p-2">
+        <div class="row">
+          <div class="pb-3">
+            <div class="card rounded-3">
+              <div class="card-body">
+                <h5 class="card-title">Estado inicial</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <div class="height2 w-100 d-inline-block overflow-auto">
+                  <table class="table table-striped">
+                    <tr>
+                      {% for column_name in column_names %}
+                      <th>{{ column_name }}</th>
+                      {% endfor %}
+                    </tr>
+                    {% for row in data_rows %}
+                    <tr>
+                      {% for value in row %}
+                      <td>{{ value }}</td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card rounded-3">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Cantidad de columnas</h5>
+                  <h6 class="card-subtitle mb-2 text-muted"></h6>
+                  <div class=" w-100 d-inline-block overflow-auto">
+                    <h1 class="text-success text-center">{{ count_colums }}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card rounded-3">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Cantidad de registros</h5>
+                  <h6 class="card-subtitle mb-2 text-muted"></h6>
+                  <div class=" w-100 d-inline-block overflow-auto">
+                    <h1 class="text-warning  text-center">{{ count_rows }}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-5">
+    <h1>Análisis exploratorio</h1>
+    <hr>
+    <div class="row">
+
+    </div>
+  </div>
+
+
+  <!-- <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <form  action="/submit" method="post">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control"  id="nombre" name="nombre" >
+          </div>
+          <div class="form-group">
+            <label for="pwd">Message:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div> -->
+
+</body>
+
+</html>

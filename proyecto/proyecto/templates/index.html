@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Icfes predicciones</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(function () {
+            $("#includeHtml").load("{{ url_for('static', filename='navbar.html') }}");
+            console.log('a')
+        });
+    </script>
+    </script>
+    <style>
+        .gradient-custom {
+            /* fallback for old browsers */
+            background: #6a11cb;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+        }
+
+        .height {
+            height: 400px;
+        }
+
+        .height2 {
+            height: 260px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="includeHtml"></div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Formulario</h5>
+                <hr>
+                <form action="/submit" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Genero:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ESTU_GENERO" id="ESTU_GENERO"
+                                        value="F" {% if form["ESTU_GENERO"] == 'F' %}checked{% endif %}>
+                                    <label class="form-check-label" for="ESTU_GENERO">
+                                        Femenino
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ESTU_GENERO" id="ESTU_GENERO"
+                                        value="M" {% if form["ESTU_GENERO"] == 'M' %}checked{% endif %}>
+                                    <label class="form-check-label" for="ESTU_GENERO">
+                                        Masculino
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Familia tiene internet:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="FAMI_TIENEINTERNET"
+                                        id="FAMI_TIENEINTERNET" value="0"
+                                        {% if form["FAMI_TIENEINTERNET"] == '0' %}checked{% endif %}>
+                                    <label class="form-check-label" for="FAMI_TIENEINTERNET">
+                                        Si
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="FAMI_TIENEINTERNET"
+                                        id="FAMI_TIENEINTERNET" value="1"
+                                        {% if form["FAMI_TIENEINTERNET"] == '1' %}checked{% endif %}>
+                                    <label class="form-check-label" for="FAMI_TIENEINTERNET">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Familia tiene computador:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="FAMI_TIENECOMPUTADOR"
+                                        id="FAMI_TIENECOMPUTADOR" value="0"
+                                        {% if form["FAMI_TIENECOMPUTADOR"] == '0' %}checked{% endif %}>
+                                    <label class="form-check-label" for="FAMI_TIENECOMPUTADOR">
+                                        Si
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="FAMI_TIENECOMPUTADOR"
+                                        id="FAMI_TIENECOMPUTADOR" value="1"
+                                        {% if form["FAMI_TIENECOMPUTADOR"] == '1' %}checked{% endif %}>
+                                    <label class="form-check-label" for="FAMI_TIENECOMPUTADOR">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Educación padre:</label>
+                        <select id="FAMI_EDUCACIONPADRE" name="FAMI_EDUCACIONPADRE" class="form-select"
+                            aria-label="Default select example" required>
+                            <option selected>Selecciona el nivel de educación del padre</option>
+                            <option value="0" {% if form["FAMI_EDUCACIONPADRE"] == '0' %}selected{% endif %}>No aplica</option>
+                            <option value="1" {% if form["FAMI_EDUCACIONPADRE"] == '1' %}selected{% endif %}>Ninguno</option>
+                            <option value="2" {% if form["FAMI_EDUCACIONPADRE"] == '2' %}selected{% endif %}>Primaria incompleta</option>
+                            <option value="3" {% if form["FAMI_EDUCACIONPADRE"] == '3' %}selected{% endif %}>Primaria completa</option>
+                            <option value="4" {% if form["FAMI_EDUCACIONPADRE"] == '4' %}selected{% endif %}>Secundaria incompleta</option>
+                            <option value="5" {% if form["FAMI_EDUCACIONPADRE"] == '5' %}selected{% endif %}>Secundaria completa</option>
+                            <option value="6" {% if form["FAMI_EDUCACIONPADRE"] == '6' %}selected{% endif %}>Técnica o tecnólogica incompleta</option>
+                            <option value="7" {% if form["FAMI_EDUCACIONPADRE"] == '7' %}selected{% endif %}>Técnica o tecnólogica completa</option>
+                            <option value="8" {% if form["FAMI_EDUCACIONPADRE"] == '8' %}selected{% endif %}>Educación profesional incompleta</option>
+                            <option value="9" {% if form["FAMI_EDUCACIONPADRE"] == '9' %}selected{% endif %}>Educación profesional completa</option>
+                            <option value="10" {% if form["FAMI_EDUCACIONPADRE"] == '10' %}selected{% endif %}>Postgrado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Educación madre:</label>
+                        <select id="FAMI_EDUCACIONMADRE" name="FAMI_EDUCACIONMADRE" class="form-select"
+                            aria-label="Default select example" required>
+                            <option selected>Selecciona el nivel de educación del padre</option>
+                            <option value="0" {% if form["FAMI_EDUCACIONMADRE"] == '0' %}selected{% endif %}>No aplica</option>
+                            <option value="1" {% if form["FAMI_EDUCACIONMADRE"] == '1' %}selected{% endif %}>Ninguno</option>
+                            <option value="2" {% if form["FAMI_EDUCACIONMADRE"] == '2' %}selected{% endif %}>Primaria incompleta</option>
+                            <option value="3" {% if form["FAMI_EDUCACIONMADRE"] == '3' %}selected{% endif %}>Primaria completa</option>
+                            <option value="4" {% if form["FAMI_EDUCACIONMADRE"] == '4' %}selected{% endif %}>Secundaria incompleta</option>
+                            <option value="5" {% if form["FAMI_EDUCACIONMADRE"] == '5' %}selected{% endif %}>Secundaria completa</option>
+                            <option value="6" {% if form["FAMI_EDUCACIONMADRE"] == '6' %}selected{% endif %}>Técnica o tecnólogica incompleta</option>
+                            <option value="7" {% if form["FAMI_EDUCACIONMADRE"] == '7' %}selected{% endif %}>Técnica o tecnólogica completa</option>
+                            <option value="8" {% if form["FAMI_EDUCACIONMADRE"] == '8' %}selected{% endif %}>Educación profesional incompleta</option>
+                            <option value="9" {% if form["FAMI_EDUCACIONMADRE"] == '9' %}selected{% endif %}>Educación profesional completa</option>
+                            <option value="10" {% if form["FAMI_EDUCACIONMADRE"] == '10' %}selected{% endif %}>Postgrado</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="nombre">Estrato socioeconómico:</label>
+                        <select id="FAMI_ESTRATOVIVIENDA" name="FAMI_ESTRATOVIVIENDA" class="form-select"
+                            aria-label="Default select example" required>
+                            <option selected>Selecciona...</option>
+                            <option value="1" {% if form["FAMI_ESTRATOVIVIENDA"] == '1' %}selected{% endif %}>1</option>
+                            <option value="2" {% if form["FAMI_ESTRATOVIVIENDA"] == '2' %}selected{% endif %}>2</option>
+                            <option value="3" {% if form["FAMI_ESTRATOVIVIENDA"] == '3' %}selected{% endif %}>3</option>
+                            <option value="4" {% if form["FAMI_ESTRATOVIVIENDA"] == '4' %}selected{% endif %}>4</option>
+                            <option value="5" {% if form["FAMI_ESTRATOVIVIENDA"] == '5' %}selected{% endif %}>5</option>
+                            <option value="6" {% if form["FAMI_ESTRATOVIVIENDA"] == '6' %}selected{% endif %}>6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Numero de personas en el hogar:</label>
+                        <input type="number" class="form-control" id="FAMI_PERSONASHOGAR" name="FAMI_PERSONASHOGAR"
+                            required
+                            {% if form["FAMI_PERSONASHOGAR"] %}value="{{form["FAMI_PERSONASHOGAR"]}}"{% endif %}>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Horas que trabaja a la semana:</label>
+                        <input type="number" class="form-control" id="ESTU_HORASSEMANATRABAJA"
+                            name="ESTU_HORASSEMANATRABAJA" required
+                            {% if form["ESTU_HORASSEMANATRABAJA"] %}value="{{form["ESTU_HORASSEMANATRABAJA"]}}"{% endif %}>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                </form>
+            </div>
+        </div>
+        {% if is_calculated %}
+        <div class="card rounded-3 mt-2">
+            <div class="card-body">
+                <h4 class="card-title">Resultado</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Teniendo en cuenta los parametros entregados, lo mas probable
+                    es que el estudiante:</h6>
+                <div class=" w-100 d-inline-block overflow-auto">
+                    {% if result %}
+                    <h1 class="text-success text-center">Por encima de la media</h1>
+                    {% else %}
+                    <h1 class="text-danger text-center">Por debajo de la media</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
