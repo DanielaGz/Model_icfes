@@ -56,7 +56,8 @@ class Process:
         # Contar la cantidad de registros por encima y por debajo de la media
         counts = new_data['POR_ENCIMA_MEDIA'].value_counts()
 
-        # Configurar el estilo de matplotlib con tonos pastelss
+        # Configurar el estilo de matplotlib con tonos pastel
+        
 
         # Crear una gráfica de torta
         plt.figure(figsize=(8, 8))
@@ -71,7 +72,8 @@ class Process:
         # Supongamos que tienes una lista de nombres de características en features
         #features = ['ESTU_GENERO', 'FAMI_EDUCACIONPADRE', 'FAMI_EDUCACIONMADRE', 'FAMI_TIENEINTERNET', 'FAMI_TIENECOMPUTADOR', 'FAMI_ESTRATOVIVIENDA', 'FAMI_PERSONASHOGAR', 'PUNT_GLOBAL']
 
-        # Configurar el estilo de matplotlib con tonos pastelss
+        # Configurar el estilo de matplotlib con tonos pastel
+        
 
         # Crear una paleta de colores pastel con la misma longitud que features
         colores_pastel = plt.cm.Paired(np.arange(len(self.features )))
@@ -89,7 +91,8 @@ class Process:
         plt.xticks([])
         plt.savefig("static/distribution.jpg")
 
-    def get_multiple_graphic(self, df):ss
+    def get_multiple_graphic(self, df):
+        
         df = df[['FAMI_EDUCACIONPADRE',	'FAMI_EDUCACIONMADRE','FAMI_TIENEINTERNET','FAMI_TIENECOMPUTADOR','FAMI_ESTRATOVIVIENDA','FAMI_PERSONASHOGAR','ESTU_HORASSEMANATRABAJA','ESTU_GENERO_F','ESTU_GENERO_M']]
         num_columnas = df.shape[1]
         # Calcular el número de filas y columnas para el diseño de subgráficos
